@@ -9,11 +9,14 @@ from mac_vendor_lookup import MacLookup, VendorNotFoundError  # ← nuevo
 from .host import Host
 from evillimiter.console.io import IO
 
+import warnings
 import logging
+warnings.filterwarnings("ignore")
 logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
 
 from scapy.all import sr1, ARP, conf
-conf.verb = 0  # Silencia todos los warnings de scapy
+conf.verb = 0
+conf.warning_threshold = 999999
 
 class HostScanner(object):
     def __init__(self, interface, iprange):
